@@ -6,7 +6,7 @@ interface IProps {
   setPeople: React.Dispatch<React.SetStateAction<Props["people"]>>
 }
 
-const AddToList: React.FC<IProps> = () => {
+const AddToList: React.FC<IProps> = ({ people, setPeople }) => {
   const [input, setInput] = useState({
     name: "",
     url: "",
@@ -27,8 +27,24 @@ const AddToList: React.FC<IProps> = () => {
   }
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-
+    if (
+      !input.name ||
+      !input.age ||
+      !input.url
+    ) {
+      return
+    }
+    setPeople([
+      ...people,
+      {
+        name: input.name,
+        age: +input.age,
+        url: input.url,
+        note: input.note
+      }
+    ])
   }
+
 
   return (
     <div className="AddToList">
@@ -44,7 +60,7 @@ const AddToList: React.FC<IProps> = () => {
         name="name"
       />
       <input
-        type="text"
+        type="number"
         placeholder="Age"
         className="AddToList-input"
         value={input.age}
@@ -57,7 +73,7 @@ const AddToList: React.FC<IProps> = () => {
         className="AddToList-input"
         value={input.url}
         onChange={handleChange}
-        name="img"
+        name="url"
 
       />
       <textarea
