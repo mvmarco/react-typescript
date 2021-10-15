@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
+import { IState as Props } from '../App'
 
-function AddToList() {
+interface IProps {
+  people: Props["people"],
+  setPeople: React.Dispatch<React.SetStateAction<Props["people"]>>
+}
+
+const AddToList: React.FC<IProps> = () => {
   const [input, setInput] = useState({
     name: "",
     url: "",
@@ -8,7 +14,7 @@ function AddToList() {
     note: "",
   })
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setInput({
       ...input,
       // if e.target.name is === to age it will be age: e.target.value and it is
@@ -18,6 +24,10 @@ function AddToList() {
       // {...test, c:"c"} ----------> {a: 'a', b: 'b', c: 'c'}
       [e.target.name]: e.target.value
     })
+  }
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+
   }
 
   return (
@@ -57,7 +67,10 @@ function AddToList() {
         onChange={handleChange}
         name="note"
       />
-      <button>
+      <button
+        className="AddToList-btn"
+        onClick={(handleClick)}
+      >
         Add To List
       </button>
     </div>

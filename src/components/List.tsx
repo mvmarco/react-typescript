@@ -1,14 +1,5 @@
 import React from 'react'
-interface IProps {
-  //array of objects
-  people: {
-    name: string,
-    age: number,
-    url: string,
-    note?: string // optional, either a string or undefined: hover it
-  }[]
-}
-
+import { IState as IProps } from '../App'
 // const List = ({people}: IProps) => {.. same as below
 
 const List: React.FC<IProps> = ({ people }) => {
